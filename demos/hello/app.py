@@ -10,6 +10,8 @@ from flask import Flask
 
 app = Flask(__name__)
 
+app.config['ADMIN_NAME'] = 'zootopia'
+
 
 # the minimal Flask application
 @app.route('/')
@@ -25,7 +27,7 @@ def say_hello():
 
 
 # dynamic route, URL variable default
-@app.route('/greet', defaults={'name': 'Programmer'})
+@app.route('/greet', defaults={'name': 'Stranger'})
 @app.route('/greet/<name>')
 def greet(name):
     return '<h1>Hello, %s!</h1>' % name
@@ -36,3 +38,8 @@ def greet(name):
 def hello():
     """Just say hello."""
     click.echo('Hello, Human!')
+
+@app.cli.command('say-hello')
+def say():
+    """加油"""
+    click.echo("加油")
